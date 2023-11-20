@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    #url: jdbc:mysql://localhost:3306/study
+    #로컬 사용시
+    url: jdbc:mysql://persi-database03.cxu1wjskelhg.ap-northeast-2.rds.amazonaws.com:3306
+    #RDS 사용시
+    username: persi
+    password: masterpersi
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: never
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+        hbm2ddl:
+          auto: create
+          #auto: create는 기존 테이블을 모두 없애버리고 새로 만들게 됨
+          #JPA가 @Entity가 붙은 대상을 찾아내어 Database에 테이블을 만들게 됨
+          #auto: update는 바뀐 부분에 대해서만 적용을 해줌
+          #처음 Database를 만드는 것 아니라면 update로 해두는 것이 좋음
+        default_batch_fetch_size: 1000
