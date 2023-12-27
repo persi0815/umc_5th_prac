@@ -10,6 +10,7 @@ import study.apiPayload.code.ErrorReasonDTO;
 @AllArgsConstructor
 public enum ErrorStatus implements BaseErrorCode {
 
+    // test
     _TEMP_EXCEPTION(HttpStatus.FORBIDDEN, "TEMP403", "이런 요청은 보내지마라ㅡㅡ"),
 
     // 가장 일반적인 응답,
@@ -23,8 +24,11 @@ public enum ErrorStatus implements BaseErrorCode {
     MEMBER_NOT_FOUND(HttpStatus.BAD_REQUEST, "MEMBER4001", "사용자가 없습니다."),
     NICKNAME_NOT_EXIST(HttpStatus.BAD_REQUEST, "MEMBER4002", "닉네임은 필수 입니다."),
 
-    // 예시,,,
-    ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ARTICLE4001", "게시글이 없습니다.");
+    // 게시글 관련 에러
+    ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ARTICLE4001", "게시글이 없습니다."),
+
+    //음식 관련 에러
+    FOOD_CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "FOOD4001","음식 카테고리가 없습니다.");
 
 
     private final HttpStatus httpStatus;

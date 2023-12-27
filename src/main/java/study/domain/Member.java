@@ -1,6 +1,9 @@
 package study.domain;
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import study.domain.common.BaseEntity;
 import study.domain.enums.Gender;
 import study.domain.enums.MemberStatus;
@@ -24,6 +27,11 @@ import java.util.List;
 //setter를 어디에서나 사용할 수 있게 하는게 아닌것
 //DTO: data transfer: 데이터 전송 시. 클라이언트가 필요하는 정보만 보내는 것(민감하거나 필요하지 않은 정보는 전달x). 클라이언트와 api는 dto 주고 받는다.
 //DAO: data access: 로직과 db 사이에서 오감. dto를 dao로 변환. dto가 가지고 있지 않는 것들을 dao 만들때 넣어주는 것.
+
+//9주차에서 추가
+@DynamicUpdate
+@DynamicInsert
+//두 개는 insert와 update 시 null 인 경우는 그냥 쿼리를 보내지 않도록 해줌
 
 //lombok에서 제공해주는 것으로, getter를 만들어주는 어노테이션
 @Builder //아래 두개가 builder 생성
@@ -77,16 +85,15 @@ public class Member extends BaseEntity{
     private LocalDate inactiveDate;
 
     //어떤 값이 저장될 지 모르기에 그냥 String 형태
-    @Column(nullable = false, length = 50)
+    //@Column(nullable = false, length = 50) //소셜 로그인 없이 하는 중이라 이메일은 nullable로 바꾸고 진행
     private String email;
 
+    @ColumnDefault("0")
     private Integer point;
-
+    //포인트도 원래 디폴트가 0이어야 함
     //여기까지 필드 정의
 
     //여기부터 연관관계 매핑
-
-
     //양방향 매핑 -> 연관 관계 편의 메서드가 필요!!
     //장점: 객체 그래프 탐색으로 인한 이점이 있음 & cascade 설정가능
     //JPA의 cascade: 참조의 대상이 되는 엔티티에 설정을 해서

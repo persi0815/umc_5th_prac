@@ -20,8 +20,6 @@ public enum CommonErrorStatus implements BaseErrorCode {
     // 멤버 관련 응답
 
     // ~~~ 관련 응답 ....
-
-
     private final HttpStatus httpStatus;
     private final String code;
     private final String message;
