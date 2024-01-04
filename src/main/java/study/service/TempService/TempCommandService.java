@@ -1,4 +1,7 @@
 package study.service.TempService;
+
+public interface TempCommandService {
+}
 /* Service 작성하기
 1. GET 요청과 나머지 요청에 대해 아래와 같이 분리한다.
 
@@ -14,5 +17,4 @@ package study.service.TempService;
 3. 컨트롤러는 인터페이스를 의존하며 실제 인터페이스에 대한 구체화 클래스는
 	 Springboot의 의존성 주입을 이용한다!
  */
-public interface TempCommandService {
-}
+

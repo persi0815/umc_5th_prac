@@ -1,5 +1,7 @@
 package study.web.dto;
 import lombok.Getter;
+import study.domain.FoodCategory;
+import study.domain.enums.Sex;
 import study.validation.annotation.ExistCategories;
 
 import javax.validation.constraints.NotBlank;
@@ -7,19 +9,19 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
-public class MemberRequestDTO {
+public class MemberRequestDto {
     @Getter
-    public static class JoinDto{
+    public static class JoinDto {
         @NotBlank
         String name;
         @NotNull
-        Integer gender;
-        @NotNull
-        Integer birthYear;
-        @NotNull
-        Integer birthMonth;
-        @NotNull
-        Integer birthDay;
+        Integer sex;
+        //        @NotNull
+//        Integer birthYear;
+//        @NotNull
+//        Integer birthMonth;
+//        @NotNull
+//        Integer birthDay;
         @Size(min = 5, max = 12)
         String address;
         @Size(min = 5, max = 12)

@@ -36,3 +36,5 @@ public class ApiResponse<T> {
         return new ApiResponse<>(true, code, message, data);
     }
 }
+
+//ApiResponse가 커스터마이징

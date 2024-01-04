@@ -9,22 +9,20 @@ import study.apiPayload.code.ReasonDTO;
 @Getter
 @AllArgsConstructor
 public enum SuccessStatus implements BaseCode {
-    // 일반적인 응답
-    _OK(HttpStatus.OK, "COMMON200", "성공입니다.");
-
-    // 멤버 관련 응답
-
-    // ~~~ 관련 응답
+    _OK(HttpStatus.OK, "COMMON200", "자네의 요청을 아주 성공적으로 수행했다네. 바로 이 김두현이말이지."),
+    _CREATED(HttpStatus.CREATED, "COMMON201", "자네가 원하는 것? 아주 깔쌈하게 생성했다네. 바로 이 김두현이말이지.");
 
     private final HttpStatus httpStatus;
     private final String code;
     private final String message;
 
+
     @Override
     public ReasonDTO getReason() {
         return ReasonDTO.builder()
-                .message(message)
+                .httpStatus(httpStatus)
                 .code(code)
+                .message(message)
                 .isSuccess(true)
                 .build();
     }
@@ -32,11 +30,11 @@ public enum SuccessStatus implements BaseCode {
     @Override
     public ReasonDTO getReasonHttpStatus() {
         return ReasonDTO.builder()
-                .message(message)
-                .code(code)
-                .isSuccess(true)
                 .httpStatus(httpStatus)
-                .build()
-                ;
+                .code(code)
+                .message(message)
+                .isSuccess(true)
+                .build();
+
     }
 }

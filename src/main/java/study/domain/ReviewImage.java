@@ -1,7 +1,7 @@
 package study.domain;
 
 import lombok.*;
-import study.domain.common.BaseEntity;
+import study.domain.common.BaseTime;
 
 import javax.persistence.*;
 
@@ -10,17 +10,18 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class ReviewImage extends BaseEntity {
+public class ReviewImage extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String image_url; //원래 text type
+    @Lob
+    private String imageUrl; //원래 text type
 
     //단방향
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "review_id")
+    //@JoinColumn(name = "review_id")
     private Review review;
 
 }

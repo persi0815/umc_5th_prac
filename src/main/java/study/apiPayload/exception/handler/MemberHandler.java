@@ -5,12 +5,8 @@ import study.apiPayload.code.status.ErrorStatus;
 import study.apiPayload.exception.GeneralException;
 
 public class MemberHandler extends GeneralException {
-    public MemberHandler(BaseErrorCode code) {
-        super(code);
-    }
 
-    public static FoodCategoryHandler foodCategoryNotFound(String category) {
-        return new FoodCategoryHandler(ErrorStatus.MEMBER_NOT_FOUND);
+    public MemberHandler(BaseErrorCode errorCode) {
+        super(errorCode);
     }
 }
-//MEMBER_NOT_FOUND

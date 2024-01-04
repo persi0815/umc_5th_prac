@@ -1,8 +1,8 @@
 package study.service.MemberService;
 
 import study.domain.Member;
-import study.web.dto.MemberRequestDTO;
+import study.web.dto.MemberRequestDto;
 
 public interface MemberCommandService {
-    Member joinMember(MemberRequestDTO.JoinDto request);
+    Member joinMember(MemberRequestDto.JoinDto request);
 }

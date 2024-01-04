@@ -4,9 +4,9 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import study.domain.common.BaseEntity;
-import study.domain.enums.Gender;
+import study.domain.common.BaseTime;
 import study.domain.enums.MemberStatus;
+import study.domain.enums.Sex;
 import study.domain.enums.SocialType;
 import study.domain.mapping.MemberAgree;
 import study.domain.mapping.MemberMission;
@@ -44,7 +44,7 @@ import java.util.List;
 //위 세 개의 어노테이션은 자바의 디자인 패턴 중 하나인 빌더 패턴을 사용하기 위함
 //빌더 패턴을 사용하면 생성자를 사용하는 것보다 더욱 편리하게 코딩이 가능
 
-public class Member extends BaseEntity{
+public class Member extends BaseTime {
 //모든 엔티티 클래스마다 BaseEntity 클래스를 상속받으면 됨
 
     @Id //기본 키
@@ -72,7 +72,7 @@ public class Member extends BaseEntity{
     //기본 값인 ORDINAL을 사용하면 데이터베이스에 enum의 순서가 저장이 되는데,
     //만약 Springboot에서 enum의 순서를 바꾸게 될 경우 에러 생김!!
     @Column(columnDefinition = "VARCHAR(10)")
-    private Gender gender;
+    private Sex sex;
 
     @Enumerated(EnumType.STRING)
     private SocialType socialType; //어떤 플랫폼 통해 로그인하는지

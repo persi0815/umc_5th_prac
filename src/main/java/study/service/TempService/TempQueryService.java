@@ -1,5 +1,5 @@
 package study.service.TempService;
 
 public interface TempQueryService {
-    void CheckFlag(Integer flag);
+    void checkFlag(Integer flag);
 }

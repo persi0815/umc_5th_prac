@@ -1,6 +1,6 @@
 package study.domain;
 import lombok.*;
-import study.domain.common.BaseEntity;
+import study.domain.common.BaseTime;
 import study.domain.mapping.MemberMission;
 
 import javax.persistence.*;
@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Mission extends BaseEntity {
+public class Mission extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +25,7 @@ public class Mission extends BaseEntity {
     private LocalDate deadline;
 
     //원래 text type
+    @Lob
     private String missionSpec;
 
     @ManyToOne(fetch = FetchType.LAZY)

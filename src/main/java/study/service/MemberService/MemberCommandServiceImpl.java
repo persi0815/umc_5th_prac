@@ -10,8 +10,9 @@ import study.domain.FoodCategory;
 import study.domain.Member;
 import study.domain.mapping.MemberPrefer;
 import study.repository.FoodCategoryRepository;
+import study.repository.MemberPreferRepository;
 import study.repository.MemberRepository;
-import study.web.dto.MemberRequestDTO;
+import study.web.dto.MemberRequestDto;
 import org.springframework.transaction.annotation.Transactional;
 //import javax.transaction.Transactional;
 import java.util.List;
@@ -19,27 +20,27 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+//@Transactional(readOnly = true)
 public class MemberCommandServiceImpl implements MemberCommandService {
 
     private final MemberRepository memberRepository;
     private final FoodCategoryRepository foodCategoryRepository;
+    private final MemberPreferRepository memberPreferRepository;
 
     @Override
     @Transactional
-    public Member joinMember(MemberRequestDTO.JoinDto request) {
+    public Member joinMember(MemberRequestDto.JoinDto request) {
+        Member member = MemberConverter.toMember(request);
+        setMemberPreferList(request, member);
 
-        Member newMember = MemberConverter.toMember(request);
+        return memberRepository.save(member);
+    }
+
+    private void setMemberPreferList(MemberRequestDto.JoinDto request, Member member) {
         List<FoodCategory> foodCategoryList = request.getPreferCategory().stream()
-                .map(category -> {
-                    return foodCategoryRepository.findById(category)
-                            .orElseThrow(() -> new FoodCategoryHandler(ErrorStatus.FOOD_CATEGORY_NOT_FOUND));
-                }).collect(Collectors.toList());
+                .map(category -> foodCategoryRepository.findById(category).orElseThrow(() -> new FoodCategoryHandler(ErrorStatus.FOOD_CATEGORY_NOT_FOUND))).toList();
+        List<MemberPrefer> memberPreferList = MemberPreferConverter.toMemberPreferList(member, foodCategoryList);
 
-        List<MemberPrefer> memberPreferList = MemberPreferConverter.toMemberPreferList(foodCategoryList);
-
-        memberPreferList.forEach(memberPrefer -> {memberPrefer.setMember(newMember);});
-
-        return memberRepository.save(newMember);
+        memberPreferRepository.saveAll(memberPreferList);
     }
 }

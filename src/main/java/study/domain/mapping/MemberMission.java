@@ -5,15 +5,15 @@ import javax.persistence.*;
 
 import study.domain.Member;
 import study.domain.Mission;
-import study.domain.common.BaseEntity;
+import study.domain.common.BaseTime;
 import study.domain.enums.MissionStatus;
 
 @Entity
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class MemberMission extends BaseEntity {
+public class MemberMission extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 import study.domain.Member;
 import study.domain.Terms;
-import study.domain.common.BaseEntity;
+import study.domain.common.BaseTime;
 
 @Entity
 @Getter
@@ -13,7 +13,7 @@ import study.domain.common.BaseEntity;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 
-public class MemberAgree extends BaseEntity{
+public class MemberAgree extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

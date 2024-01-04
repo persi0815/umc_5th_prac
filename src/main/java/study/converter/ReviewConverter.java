@@ -1,28 +1,44 @@
 package study.converter;
 
+import study.domain.Member;
+import study.domain.Mission;
 import study.domain.Review;
+import study.domain.Store;
 import study.service.MemberService.MemberQueryService;
 import study.service.StoreService.StoreQueryService;
-import study.web.dto.ReviewRequestDTO;
-import study.web.dto.ReviewResponseDTO;
-import study.web.dto.ReviewResponseDTO.WriteResultDto;
+import study.web.dto.MissionResponseDto;
+import study.web.dto.ReviewRequestDto;
+import study.web.dto.ReviewResponseDto;
+import study.web.dto.ReviewResponseDto.WriteResultDto;
+
+import java.util.List;
 
 public class ReviewConverter {
 
-    private static MemberQueryService memberQueryService;
-    private static StoreQueryService storeQueryService;
+    public static ReviewResponseDto.ReviewListDto toReviewListDto(List<Review> reviewList) {
+        List<ReviewResponseDto.ReviewDto> reviewDtoList = reviewList.stream()
+                .map(review -> ReviewResponseDto.ReviewDto.builder()
+                        .title(review.getTitle())
+                        .memberName(review.getMember().getName())
+                        .body(review.getBody())
+                        .build()).toList();
 
-    public static Review toReview(ReviewRequestDTO.WriteDto writeDto, Long storeId) {
+        return ReviewResponseDto.ReviewListDto.builder()
+                .reviewDtoList(reviewDtoList)
+                .build();
+    }
+
+    public static Review toReview(ReviewRequestDto.WriteDto writeDto, Member member, Store store) {
 
         return Review.builder()
                 .body(writeDto.getBody())
                 .score(writeDto.getScore())
-                .member(memberQueryService.findById(writeDto.getMemberId()))
-                .store(storeQueryService.findById(storeId))
+                .member(member)
+                .store(store)
                 .build();
     }
 
-    public static ReviewResponseDTO.WriteResultDto toWriteResultDto(Review review) {
+    public static ReviewResponseDto.WriteResultDto toWriteResultDto(Review review) {
         return WriteResultDto.builder()
                 .id(review.getId())
                 .build();

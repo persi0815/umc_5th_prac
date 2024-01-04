@@ -1,19 +1,18 @@
 package study.converter;
 
 import study.domain.FoodCategory;
+import study.domain.Member;
 import study.domain.mapping.MemberPrefer;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MemberPreferConverter {
-    public static List<MemberPrefer> toMemberPreferList(List<FoodCategory> foodCategoryList){
 
+    public static List<MemberPrefer> toMemberPreferList(Member member, List<FoodCategory> foodCategoryList) {
         return foodCategoryList.stream()
-                .map(foodCategory ->
-                        MemberPrefer.builder()
-                                .foodCategory(foodCategory)
-                                .build()
-                ).collect(Collectors.toList());
+                .map(foodCategory -> MemberPrefer.builder()
+                        .member(member)
+                        .foodCategory(foodCategory)
+                        .build()
+                ).toList();
     }
 }

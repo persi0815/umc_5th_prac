@@ -1,10 +1,15 @@
 package study.service.ReviewService;
 
+import study.domain.Mission;
 import study.domain.Review;
-import study.web.dto.ReviewRequestDTO;
+import study.web.dto.ReviewRequestDto;
+
+import java.util.List;
 
 public interface ReviewCommandService {
-    Review writeReview(ReviewRequestDTO.WriteDto writeDto);
+    List<Review> findAllByMemberId(Long storeId);
 
-    Review writeReview(ReviewRequestDTO.WriteDto writeDto, Long storeId);
+    Review writeReview(ReviewRequestDto.WriteDto writeDto, Long storeId);
+
+
 }

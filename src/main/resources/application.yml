@@ -24,3 +24,5 @@ spring:
           #auto: update는 바뀐 부분에 대해서만 적용을 해줌
           #처음 Database를 만드는 것 아니라면 update로 해두는 것이 좋음
         default_batch_fetch_size: 1000
+logging:
+   level.root = DEBUG
