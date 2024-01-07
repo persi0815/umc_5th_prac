@@ -8,6 +8,7 @@ import study.domain.common.BaseTime;
 import study.domain.enums.MemberStatus;
 import study.domain.enums.Sex;
 import study.domain.enums.SocialType;
+import study.domain.enums.UserRole;
 import study.domain.mapping.MemberAgree;
 import study.domain.mapping.MemberMission;
 import study.domain.mapping.MemberPrefer;
@@ -35,7 +36,7 @@ import java.util.List;
 
 //lombok에서 제공해주는 것으로, getter를 만들어주는 어노테이션
 @Builder //아래 두개가 builder 생성
-@NoArgsConstructor(access = AccessLevel.PROTECTED) //스프링 스펙상 필요함
+@NoArgsConstructor(access = AccessLevel.PROTECTED) //무분별한 생성자 사용을 막음
 //private: 누구든지 접근 불가, protected: 상속된 것만 접근 가능
 //인자가 없는 기본 생성자
 @AllArgsConstructor
@@ -79,14 +80,24 @@ public class Member extends BaseTime {
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "VARCHAR(15) DEFAULT 'ACTIVE'")
-    //@Column(nullable = false, length = 40) 처럼도 사용능
+    //@Column(nullable = false, length = 40) 처럼도 사용 가능
     private MemberStatus status;
 
     private LocalDate inactiveDate;
 
     //어떤 값이 저장될 지 모르기에 그냥 String 형태
     //@Column(nullable = false, length = 50) //소셜 로그인 없이 하는 중이라 이메일은 nullable로 바꾸고 진행
+    @Column(nullable = false, length = 50)
     private String email;
+
+    @Column(nullable = true, length = 50)
+    //네이버 로그인 시, 비밀번호 불필요하므로 nullable=true로 설정
+    private String password;
+
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING) //ENUM Type를 db에선 string으로 관리하도록
+    private UserRole role;
+
 
     @ColumnDefault("0")
     private Integer point;
